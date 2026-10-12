@@ -39,7 +39,7 @@ tickwright-lite next     "0 0 * * *" --tz America/New_York --from "2026-11-01 00
 The full edition, Tickwright, adds `lint` (day-of-month and day-of-week both
 set, impossible dates, DST traps and more) and `compare` (are two expressions
 equivalent, checked over a full 400-year cycle):
-https://pnscripts.com/marketplace/tickwright. Lite is complete on its own.
+https://pnscripts.com/marketplace/cli-tickwright. Lite is complete on its own.
 
 ## Build and test
 

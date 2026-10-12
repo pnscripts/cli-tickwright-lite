@@ -13,7 +13,7 @@ LABEL org.opencontainers.image.title="Tickwright Lite" \
       org.opencontainers.image.description="Validate and explain cron expressions (English and Bulgarian) and list their next runs in any time zone." \
       org.opencontainers.image.vendor="PN Scripts" \
       org.opencontainers.image.licenses="MIT" \
-      org.opencontainers.image.url="https://pnscripts.com/marketplace/tickwright" \
+      org.opencontainers.image.url="https://pnscripts.com/marketplace/cli-tickwright" \
       org.opencontainers.image.source="https://github.com/pnscripts/tickwright-lite"
 COPY --from=build /out/tickwright-lite /tickwright-lite
 COPY LICENSE /LICENSE
