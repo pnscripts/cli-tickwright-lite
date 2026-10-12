@@ -1,0 +1,12 @@
+$ tickwright-lite explain "*/15 9-17 * * MON-FRI"
+*/15 9-17 * * MON-FRI  (5 fields)
+  EN  Every 15 minutes, between 09:00 and 17:59, Monday through Friday
+  BG  На всеки 15 минути, между 09:00 и 17:59, от понеделник до петък
+
+$ tickwright-lite next "30 3 * * *" --tz Europe/Sofia --from "2027-03-27 00:00" -n 3
+30 3 * * *  At 03:30, every day
+zone  Europe/Sofia, after 2027-03-27 00:00:00 EET
+
+  1  Sat 2027-03-27 03:30:00 EET   2027-03-27 01:30Z
+  2  Sun 2027-03-28 04:30:00 EEST  2027-03-28 01:30Z  moved forward: wall time skipped by DST
+  3  Mon 2027-03-29 03:30:00 EEST  2027-03-29 00:30Z
