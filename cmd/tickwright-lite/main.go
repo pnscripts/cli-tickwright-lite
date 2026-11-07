@@ -12,7 +12,7 @@ import (
 	"time"
 	_ "time/tzdata" // embed the zone database so binaries work everywhere
 
-	"github.com/pnscripts/tickwright-lite/cron"
+	"github.com/pnscripts/cli-tickwright-lite/cron"
 )
 
 var version = "1.0.0"

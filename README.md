@@ -12,8 +12,11 @@ daylight-saving changes.
 - **Binaries**: download the archive for your platform from GitHub Releases
   (Linux, macOS, Windows; amd64 and arm64), unpack, put `tickwright-lite` on
   your `PATH`. Verify with `sha256sum -c SHA256SUMS`.
-- **Docker**: `docker run --rm pnscripts/tickwright-lite explain "0 9 * * 1-5"`
-- **Go**: `go install github.com/pnscripts/tickwright-lite/cmd/tickwright-lite@latest`
+- **Go** (1.22 or newer): `go install github.com/pnscripts/cli-tickwright-lite/cmd/tickwright-lite@latest`
+  ([pkg.go.dev](https://pkg.go.dev/github.com/pnscripts/cli-tickwright-lite)).
+- **Docker**: the image is not on Docker Hub yet; build it from this
+  repository with `docker build -t tickwright-lite .`, then
+  `docker run --rm tickwright-lite explain "0 9 * * 1-5"`.
 
 ## Usage
 
@@ -46,7 +49,7 @@ https://pnscripts.com/marketplace/cli-tickwright. Lite is complete on its own.
 ```
 make test     # go vet + go test (Go 1.22+, no third-party modules)
 make dist     # dist/*.tar.gz, *.zip and SHA256SUMS for a GitHub release
-docker build -t pnscripts/tickwright-lite .
+docker build -t tickwright-lite .
 ```
 
 ## Licence

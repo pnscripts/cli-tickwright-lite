@@ -1,3 +1,3 @@
-module github.com/pnscripts/tickwright-lite
+module github.com/pnscripts/cli-tickwright-lite
 
 go 1.22
