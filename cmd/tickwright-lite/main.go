@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"runtime/debug"
 	"strings"
 	"time"
 	_ "time/tzdata" // embed the zone database so binaries work everywhere
@@ -15,7 +16,19 @@ import (
 	"github.com/pnscripts/cli-tickwright-lite/cron"
 )
 
-var version = "1.0.0"
+// version is set by the release build (-ldflags "-X main.version=...");
+// for "go install ...@vX.Y.Z" it comes from the module version.
+var version = ""
+
+func init() {
+	if version != "" {
+		return
+	}
+	version = "dev"
+	if bi, ok := debug.ReadBuildInfo(); ok && bi.Main.Version != "" && bi.Main.Version != "(devel)" {
+		version = strings.TrimPrefix(bi.Main.Version, "v")
+	}
+}
 
 const (
 	exitOK      = 0
@@ -28,10 +41,10 @@ func main() { os.Exit(run(os.Args[1:], os.Stdout, os.Stderr, time.Now)) }
 const usage = `tickwright-lite %s: cron expressions, checked and explained
 
 Usage:
-  tickwright validate <expr>             exit 0 if valid, 1 if not
-  tickwright explain  <expr> [--lang en|bg|both]
-  tickwright next     <expr> [-n 10] [--tz Zone] [--from TIME]
-  tickwright version
+  tickwright-lite validate <expr>           exit 0 if valid, 1 if not
+  tickwright-lite explain  <expr> [--lang en|bg|both]
+  tickwright-lite next     <expr> [-n 10] [--tz Zone] [--from TIME]
+  tickwright-lite version
 
 Expressions: 5 fields (min hour dom month dow), 6 fields (sec first),
 or @yearly @annually @monthly @weekly @daily @midnight @hourly.

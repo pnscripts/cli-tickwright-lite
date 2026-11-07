@@ -1,4 +1,4 @@
-VERSION := 1.0.1
+VERSION := 1.0.2
 NAME    := tickwright-lite
 LDFLAGS := -s -w -X main.version=$(VERSION)
 TARGETS := linux/amd64 linux/arm64 darwin/amd64 darwin/arm64 windows/amd64 windows/arm64

@@ -5,7 +5,7 @@ WORKDIR /src
 COPY go.mod ./
 COPY cron ./cron
 COPY cmd ./cmd
-ARG VERSION=1.0.1
+ARG VERSION=1.0.2
 RUN CGO_ENABLED=0 go build -trimpath -ldflags "-s -w -X main.version=${VERSION}" -o /out/tickwright-lite ./cmd/tickwright-lite
 
 FROM scratch
