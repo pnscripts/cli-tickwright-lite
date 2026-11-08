@@ -1,0 +1,21 @@
+# Updates for the actions the workflows run. The program has no Go
+# dependencies; govulncheck in CI covers the standard library it is built with.
+# Minor and patch updates come once a week in one pull request; security
+# updates as soon as they are published.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: '06:00'
+      timezone: Europe/Sofia
+    open-pull-requests-limit: 5
+    groups:
+      actions:
+        applies-to: version-updates
+        update-types: [minor, patch]
+      actions-security:
+        applies-to: security-updates
+        patterns: ['*']

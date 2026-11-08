@@ -1,0 +1,38 @@
+name: CI
+
+# Every push to main and every pull request: the tests, vet and known
+# vulnerabilities. Until this existed the checks ran only when a version was
+# tagged, after the work rather than during it.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Read, and nothing else.
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      # Actions are pinned to commit hashes, so a moved tag cannot change what runs here.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      # The newest 1.26 patch release, as the release workflow builds with,
+      # so the standard library carries every published fix.
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version: '1.26'
+          cache: false
+      - name: gofmt
+        run: test -z "$(gofmt -l .)" || { echo "not formatted:"; gofmt -l .; exit 1; }
+      - name: vet and tests
+        run: make test
+      - name: govulncheck
+        run: |
+          go install golang.org/x/vuln/cmd/govulncheck@latest
+          "$(go env GOPATH)/bin/govulncheck" ./...
